@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model UserWallet {
+  id            String   @id @default(uuid())
+  privy_user_id String   @unique
+  wallet_id     String   @unique
+  public_key    String
+  address       String
+  created_at    DateTime @default(now())
+
+  @@map("user_wallets")
+}
+
+model Merchant {
+  id             String        @id @default(uuid())
+  wallet_address String        @unique
+  name           String
+  slug           String?       @unique
+  avatar_url     String?
+  description    String        @default("")
+  created_at     DateTime      @default(now())
+  payment_codes  PaymentCode[]
+  invoices       Invoice[]
+  transactions   Transaction[]
+
+  @@map("merchants")
+}
+
+model PaymentCode {
+  id          String   @id @default(uuid())
+  merchant_id String
+  label       String   @default("Payment")
+  amount      Float?
+  token       String   @default("STRK")
+  is_active   Boolean  @default(true)
+  created_at  DateTime @default(now())
+  merchant    Merchant @relation(fields: [merchant_id], references: [id])
+
+  @@map("payment_codes")
+}
+
+model Invoice {
+  id           String   @id @default(uuid())
+  merchant_id  String
+  client_name  String   @default("")
+  client_email String   @default("")
+  items        Json     @default("[]")
+  total        Float    @default(0)
+  token        String   @default("STRK")
+  status       String   @default("draft")
+  tx_hash      String?
+  due_date     String?
+  created_at   DateTime @default(now())
+  merchant     Merchant @relation(fields: [merchant_id], references: [id])
+
+  @@map("invoices")
+}
+
+model Transaction {
+  id             String   @id @default(uuid())
+  merchant_id    String
+  payer_address  String
+  token          String   @default("STRK")
+  amount         Float    @default(0)
+  tx_hash        String
+  reference_type String   @default("")
+  reference_id   String?
+  created_at     DateTime @default(now())
+  merchant       Merchant @relation(fields: [merchant_id], references: [id])
+
+  @@map("transactions")
+}

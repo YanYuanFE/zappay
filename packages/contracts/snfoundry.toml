@@ -1,0 +1,4 @@
+[sncast.mainnet]
+url = "https://starknet-mainnet.infura.io/v3/4fb6afdca8f74fa6845f3bbe0387d5cb"
+account = "mainnet_deployer"
+accounts-file = "~/.starknet_accounts/starknet_open_zeppelin_accounts.json"
