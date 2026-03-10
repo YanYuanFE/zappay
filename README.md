@@ -8,7 +8,7 @@
 
 ZapPay lets merchants create payment links, QR codes, and invoices on Starknet. Customers pay with social login (Google, email, etc.) — no browser extension needed. Gas fees are fully sponsored via AVNU Paymaster.
 
-Built for the [StarkZap Developer Challenge](https://github.com/starkzap/awesome-starkzap).
+Built for the [StarkZap Developer Challenge](https://github.com/keep-starknet-strange/awesome-starkzap).
 
 ## Features
 
