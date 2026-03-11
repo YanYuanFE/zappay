@@ -14,9 +14,9 @@ export default function PrivyProvider({
         appearance: {
           theme: "light",
           accentColor: "#ec796b",
-          logo: undefined,
+          logo: "/zappay-logo.png",
         },
-        loginMethods: ["email", "google", "twitter"],
+        loginMethods: ["google"],
         embeddedWallets: {
           ethereum: {
             createOnLogin: "off",
